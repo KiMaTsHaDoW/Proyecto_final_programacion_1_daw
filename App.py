@@ -1,10 +1,10 @@
 import re
 
-from Clases.Alumnos import Alumno
+from Clases.Alumno import Alumno
 from Clases.Libros import Libro
 from Clases.ACL import ACL
-from Clases.constantes import *
-from Clases.menu import Menu
+from Clases.Constantes import *
+from Clases.Menu import Menu
 from Clases.Login import Login
 
 alumnos:[Alumno] = []
@@ -48,7 +48,7 @@ class App:
                 break
             except ValueError:
                 print("Por favor, ingresa un número válido.")
-        libro = Libro(titulo, autor, isbn, ejemplares)
+        libro:Libro = Libro(titulo, autor, isbn, ejemplares)
         libros.append(libro)
         print("Libro añadido correctamente.\n")
 
@@ -63,7 +63,7 @@ class App:
 
     @staticmethod
     def prestar_libro():
-        fecha_prestamo: str = ''
+        fecha_prestamo:str = ''
         if not alumnos:
             print("No hay alumnos registrados. Primero añade alumnos.")
             return
@@ -97,7 +97,7 @@ class App:
         while not App.validar_fecha(fecha_prestamo):
             fecha_prestamo = input("Fecha de préstamo (YYYY-MM-DD): ")
             if App.validar_fecha(fecha_prestamo):
-                acl = ACL(fecha_prestamo)
+                acl:ACL = ACL(fecha_prestamo)
                 prestamos.append({
                     "alumno": alumnos[alumno_idx],
                     "libro": libros[libro_idx],
@@ -121,7 +121,7 @@ class App:
             acl = p["ACL"]
             print(f"{idx}. {alumno} - Libro: '{libro.titulo}' - Préstamo: {acl.fecha_prestamo}")
         try:
-            seleccion = int(input("Selecciona el préstamo a devolver (número): ")) - 1
+            seleccion:int = int(input("Selecciona el préstamo a devolver (número): ")) - 1
             if seleccion not in range(len(prestamos_activos)):
                 print("Número inválido.")
                 return
@@ -138,7 +138,7 @@ class App:
     def guardar_alumnos():
         with open(ARCHIVO_ALUMNOS, 'w', encoding='utf-8') as f:
             for a in alumnos:
-                line = f"{a.nombre},{a.apellidos},{a.tramo_concedido},{a.seccion}\n"
+                line:str = f"{a.nombre},{a.apellidos},{a.tramo_concedido},{a.seccion}\n"
                 f.write(line)
 
     @staticmethod
@@ -157,7 +157,7 @@ class App:
     def guardar_libros():
         with open(ARCHIVO_LIBROS, 'w', encoding='utf-8') as f:
             for l in libros:
-                line = f"{l.titulo},{l.autor},{l.isbn},{l.numero_ejemplares}\n"
+                line:str = f"{l.titulo},{l.autor},{l.isbn},{l.numero_ejemplares}\n"
                 f.write(line)
 
     @staticmethod
@@ -177,7 +177,7 @@ class App:
         with open(ARCHIVO_PRESTAMOS, 'w', encoding='utf-8') as f:
             for p in prestamos:
                 acl = p["ACL"]
-                line = (
+                line:str = (
                     f"{p['alumno'].nombre},{p['alumno'].apellidos},{p['alumno'].tramo_concedido},{p['alumno'].seccion},"
                     f"{p['libro'].titulo},{p['libro'].autor},{p['libro'].isbn},"
                     f"{acl.fecha_prestamo},{acl.fecha_devolucion if acl.fecha_devolucion else ''},{acl.estado}\n"
@@ -204,7 +204,7 @@ class App:
 
     @staticmethod
     def validar_fecha(fecha:str):
-        patron = r'^(\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$'
+        patron:str = r'^(\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$'
         return re.match(patron, fecha) is not None
 
     @staticmethod

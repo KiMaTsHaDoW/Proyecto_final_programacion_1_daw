@@ -1,4 +1,4 @@
-from Clases.constantes import USER, PASSWORD
+from Clases.Constantes import USER, PASSWORD
 
 class Login:
     @staticmethod
