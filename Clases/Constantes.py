@@ -7,10 +7,13 @@ OPCION_4:str = '4'
 OPCION_5:str = '5'
 OPCION_6:str = '6'
 OPCION_7:str = '7'
+OPCION_8:str = '8'
+OPCION_9:str = '9'
 
 ARCHIVO_ALUMNOS:Path = Path('ficheros') / 'alumnos.txt'
 ARCHIVO_LIBROS:Path = Path('ficheros') / 'libros.txt'
 ARCHIVO_PRESTAMOS:Path = Path('ficheros') / 'prestamos.txt'
+ARCHIVO_MATERIAS:Path = Path('ficheros') / 'materias.txt'
 
 USER:str = 'Admin'
 PASSWORD:str = 'Admin1'

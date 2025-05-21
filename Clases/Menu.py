@@ -12,7 +12,9 @@ class Menu:
         print("4. Listar libros")
         print("5. Prestar libro")
         print("6. Devolver libro")
-        print("7. Guardar datos y salir")
+        print("7. Añadir materia")
+        print("8. Listar materias")
+        print("9. Guardar datos y salir")
 
     @property
     def opcion(self):

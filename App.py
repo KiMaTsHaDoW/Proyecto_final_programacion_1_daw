@@ -4,12 +4,14 @@ from Clases.Alumno import Alumno
 from Clases.Libros import Libro
 from Clases.ACL import ACL
 from Clases.Constantes import *
+from Clases.Materias import Materia
 from Clases.Menu import Menu
 from Clases.Login import Login
 
 alumnos:[Alumno] = []
 libros:[Libro] = []
 prestamos:[ACL] = []
+materias:[Materia] = []
 
 
 class App:
@@ -60,6 +62,27 @@ class App:
         else:
             for idx, libro in enumerate(libros, 1):
                 print(f"{idx}. {libro}")
+
+    @staticmethod
+    def agregar_materia():
+        print("\n--- Agregar Materia ---")
+        num_materia_op:str = input('Numero de materia: ')
+        nombre_materia:str = input('Nombre: ')
+        if num_materia_op.isdigit() and num_materia_op != '' and num_materia_op != ' ':
+            materia:Materia = Materia(int(num_materia_op), nombre_materia)
+            materias.append(materia)
+        else:
+            print('Numero de materia no valido, debe de ser un numero entero')
+
+
+    @staticmethod
+    def listar_materias():
+        print("\n--- Lista de Materias ---")
+        if not materias:
+            print("No hay materias registrados.")
+        else:
+            for idx, materia in enumerate(materias, 1):
+                print(f"{idx}. {materia}")
 
     @staticmethod
     def prestar_libro():
@@ -207,6 +230,26 @@ class App:
         patron:str = r'^(\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$'
         return re.match(patron, fecha) is not None
 
+
+    @staticmethod
+    def cargar_materias():
+        try:
+            with open(ARCHIVO_MATERIAS, 'r', encoding='utf-8') as f:
+                for line in f:
+                    parts = line.strip().split(',')
+                    if len(parts) == 4:
+                        m = Materia(int(parts[0]), parts[1])
+                        materias.append(m)
+        except FileNotFoundError:
+            print(f'El archivo {ARCHIVO_MATERIAS} no existe')
+
+    @staticmethod
+    def guardar_materias():
+        with open(ARCHIVO_MATERIAS, 'w', encoding='utf-8') as f:
+            for m in materias:
+                line:str = f"{m.num_materia},{m.nombre}\n"
+                f.write(line)
+
     @staticmethod
     def main():
         sesion_iniciada: bool = False
@@ -233,9 +276,14 @@ class App:
                 elif Menu.opcion == OPCION_6:
                     App.devolver_libro()
                 elif Menu.opcion == OPCION_7:
+                    App.agregar_materia()
+                elif Menu.opcion == OPCION_8:
+                    App.listar_materias()
+                elif Menu.opcion == OPCION_9:
                     App.guardar_alumnos()
                     App.guardar_libros()
                     App.guardar_prestamos()
+                    App.guardar_materias()
                     print("Datos guardados correctamente.")
                     break
                 else:

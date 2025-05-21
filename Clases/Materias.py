@@ -1,7 +1,7 @@
 class Materia:
-    def __init__(self, nombre:str, departamento:str):
+    def __init__(self, num_materia:int, nombre:str):
+        self.num_materia:int = num_materia
         self.nombre:str = nombre
-        self.departamento:str = departamento
 
     def __str__(self):
-        return f"{self.nombre} - Departamento: {self.departamento}"
+        return f"{self.nombre} - Numero de materia: {self.num_materia}"
