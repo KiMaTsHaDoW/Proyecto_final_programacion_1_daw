@@ -14,7 +14,8 @@ class Menu:
         print("6. Devolver libro")
         print("7. Añadir materia")
         print("8. Listar materias")
-        print("9. Guardar datos y salir")
+        print("9. Eliminar alumno")
+        print("10. Guardar datos y salir")
 
     @property
     def opcion(self):

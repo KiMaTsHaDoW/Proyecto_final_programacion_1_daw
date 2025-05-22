@@ -21,10 +21,13 @@ class App:
         nombre:str = input("Nombre: ")
         apellidos:str = input("Apellidos: ")
         tramo:str = input("Tramo concedido: ")
-        seccion:str = input("Sección: ")
-        alumno = Alumno(nombre, apellidos, tramo, seccion)
-        alumnos.append(alumno)
-        print("Alumno añadido correctamente.\n")
+        seccion:str = input("Sección (S/N): ")
+        if seccion == 'N' or seccion == 'S':
+            alumno = Alumno(nombre, apellidos, tramo, seccion)
+            alumnos.append(alumno)
+            print("Alumno añadido correctamente.\n")
+        else:
+            print('Valores Erroneos')
 
     @staticmethod
     def listar_alumnos():
@@ -32,7 +35,7 @@ class App:
         if not alumnos:
             print("No hay alumnos registrados.")
         else:
-            for idx, alumno in enumerate(alumnos, 1):
+            for idx, alumno in enumerate(alumnos, 0):
                 print(f"{idx}. {alumno}")
 
     @staticmethod
@@ -60,7 +63,7 @@ class App:
         if not libros:
             print("No hay libros registrados.")
         else:
-            for idx, libro in enumerate(libros, 1):
+            for idx, libro in enumerate(libros, 0):
                 print(f"{idx}. {libro}")
 
     @staticmethod
@@ -165,6 +168,15 @@ class App:
                 f.write(line)
 
     @staticmethod
+    def eliminar_alumno():
+        App.listar_alumnos()
+        alumno_inx:str = input('Introduce el alumno a eliminar (numero): ')
+        if alumno_inx.isdigit() and int(alumno_inx) < len(alumnos):
+            alumnos.pop(int(alumno_inx))
+        else:
+            print('Numero no valido')
+
+    @staticmethod
     def cargar_alumnos():
         try:
             with open(ARCHIVO_ALUMNOS, 'r', encoding='utf-8') as f:
@@ -237,7 +249,7 @@ class App:
             with open(ARCHIVO_MATERIAS, 'r', encoding='utf-8') as f:
                 for line in f:
                     parts = line.strip().split(',')
-                    if len(parts) == 4:
+                    if len(parts) == 2:
                         m = Materia(int(parts[0]), parts[1])
                         materias.append(m)
         except FileNotFoundError:
@@ -256,6 +268,7 @@ class App:
         App.cargar_alumnos()
         App.cargar_libros()
         App.cargar_prestamos()
+        App.cargar_materias()
         while True:
             if sesion_iniciada is False:
                 sesion_iniciada = Login.iniciar_sesion()
@@ -280,6 +293,8 @@ class App:
                 elif Menu.opcion == OPCION_8:
                     App.listar_materias()
                 elif Menu.opcion == OPCION_9:
+                    App.eliminar_alumno()
+                elif Menu.opcion == OPCION_10:
                     App.guardar_alumnos()
                     App.guardar_libros()
                     App.guardar_prestamos()
