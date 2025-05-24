@@ -1,1 +1,5 @@
-El cuerpo humano,Alonso Hernandez,345698712,10
+Matematicas,Santillana,345698712,14
+Lengua castellana y literatura,Santillana,563291262,20
+Tecnología,McGrawHill,167842935,5
+Programación en python,Cesar,137488695,26
+Sistemas gestores de bases de datos,Maria del Carmen,796488753,26
