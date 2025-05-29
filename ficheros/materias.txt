@@ -1,1 +1,5 @@
-1,Mates
+1,Matematicas
+2,Lengua castellana y literatura
+3,Biología
+4,Programacion
+5,Bases de datos

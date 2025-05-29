@@ -1,1 +1,5 @@
-David,Gonzalez Menéndez,9,2
+David,Gonzalez Menendez,3,N
+Mario,Rodriguez Fernandez,2,S
+Cristina,Alba Ruiz,1,N
+Fernando,Iglesias Carmona,4,S
+Elena,Carpin Rivas,2,S

@@ -9,6 +9,7 @@ OPCION_6:str = '6'
 OPCION_7:str = '7'
 OPCION_8:str = '8'
 OPCION_9:str = '9'
+OPCION_10:str = '10'
 
 ARCHIVO_ALUMNOS:Path = Path('ficheros') / 'alumnos.txt'
 ARCHIVO_LIBROS:Path = Path('ficheros') / 'libros.txt'
